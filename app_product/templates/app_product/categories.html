@@ -1,0 +1,52 @@
+{% extends 'auth/base.html' %}
+{% load static %}
+{% block content %}
+<main class="">
+    <div class="container m-auto mt-5 row gap-2 justify-content-center">
+        {% for category in categories %}
+        <div class="card col-3 p-0">
+            <img class="card-img-top" src="{{ category.image.url }}" alt="Card image cap"/>
+            <div class="card-body">
+                <h3>
+                    <a class="text-decoration-none" href="{% url 'products' category.id %}">{{ category.title }}</a>
+                </h3>
+                <p class="card-text">
+                    {{ category.description|truncatechars:70 }}
+                </p>
+                <div class="d-flex flex-column gap-2"></div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center">
+                        <a class="btn btn-success btn-block mt-auto" href="{% url 'products' category.id %}">View products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link text-dark" href="#" tabindex="-1">&laquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link text-dark" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link bg-dark text-white" href="#"
+                    >2 <span class="sr-only"></span
+                    ></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link text-dark" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link text-dark" href="#">&raquo;</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'auth/base.html' %}
+
+{% block content %}
+<section class="vh-100 bg-light">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                    class="img-fluid"
+                    alt="Phone image"
+                />
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label text-secondary fw-bold" for="email">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="username"
+                            class="form-control form-control-lg border-secondary rounded-3 shadow-sm"
+                            placeholder="Enter your email"
+                            value="{{ request.POST.username|default:'' }}"
+                            required
+                        />
+                        {% if form.username.errors %}
+                        <div class="text-danger mt-2">
+                            {% for error in form.username.errors %}
+                            <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label text-secondary fw-bold" for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control form-control-lg border-secondary rounded-3 shadow-sm"
+                            placeholder="Enter your password"
+                            required
+                        />
+                        {% if form.password.errors %}
+                        <div class="text-danger mt-2">
+                            {% for error in form.password.errors %}
+                            <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Forgot password -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <a class="text-primary fw-bold" href="#">Forgot password?</a>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-lg btn-block w-100 rounded-pill shadow-sm"
+                    >
+                        Sign In
+                    </button>
+                </form>
+
+                <!-- Sign up and Google login -->
+                <div class="d-flex justify-content-center mt-4">
+                    <p class="m-0 text-secondary">
+                        Don't have an account? <a href="{% url 'register' %}" class="text-primary fw-bold">Sign up</a>
+                    </p>
+                </div>
+                <p class="text-secondary text-center fw-bold mt-3 mb-3">OR</p>
+                <a
+                    class="btn btn-light btn-lg btn-block w-100 border shadow-sm text-secondary rounded-pill"
+        
+                    role="button"
+                >
+                    <i class="fab fa-google me-2"></i> Continue with Google
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
